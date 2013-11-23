@@ -37,15 +37,19 @@ void myGraph::deleteEdge(int Vertex, int Edge){
 	Vertices[Vertex].adjacencyList[Edge].weight =  0 ;  
 }
 	
-/*vector myGraph::getNeighbors(int Vertex){
-	return Vertices[Vertex].adjacencyList; 
-
-}*/
+void myGraph::getNeighbors(vector <int> neighbors, int pos){
+	for(int i=0; i<Vertices[pos].adjacencyList.size(); i++){
+		neighbors[i] = Vertices[pos].adjacencyList[i]; 
+}
 
 int myGraph::getNumberVertices(){
 	return Vertices.size(); 
 }
 
 int myGraph::getNumberEdges(int Vertex){
-	return Vertices[Vertex].adjacencyList.size(); 
+	int sum = 0; 
+	for(int i=0; i<Vertices.size(); i++){
+		sum += Vertices[i].adjacencyList.size();
+	} 
+	return sum; 
 }

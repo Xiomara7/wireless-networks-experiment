@@ -4,7 +4,6 @@
 #ifndef GRAPH
 #define GRAPH
 
-typedef float ElementType; 
 using namespace std;  
 
 class myGraph {
@@ -25,9 +24,8 @@ class myGraph {
 				vector <Data> adjacencyList;
 			 	void setX(float n){ x = n; }
 			 	void setY(float n){ y = n; }
-			 	float getX() { return x; }
-			 	float getY() { return y; } 
-
+				float getX() { return x; }
+				float getY() { return y; }
 		};
 		vector <Vertex> Vertices;
 
@@ -41,12 +39,17 @@ class myGraph {
 
 		void deleteEdge(int Vertex, int Edge); 
 
-		int getNeighbors(int Vertex);
+		void getNeighbors(vector <int> neighbors, int pos); 
 
 		int getNumberVertices(); 
 
 		int getNumberEdges(int Vertex);  
-	
+		
+		float getX(int pos) { return Vertices[pos].getX(); }
+
+		float getY(int pos) { return Vertices[pos].getY(); } 
+
 }; 
-	
+
 #endif
+

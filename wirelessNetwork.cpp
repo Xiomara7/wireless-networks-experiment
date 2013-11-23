@@ -15,9 +15,9 @@ wirelessNetwork::wirelessNetwork(){
 
 	for(int i=0; i<500; i++){
 		G.addVertex(randX, randY); 
-		for(int j=0; j < G.Vertices.size()-1; j++){
-			dist = sqrt(pow(randX - G.Vertices[j].getX()) 
-		    	     +  pow(randY - G.Vertices[j].getY())); 
+		for(int j=0; j < G.getNumberVertices(); j++){
+			dist = sqrt(pow((randX - G.getX(j)), 2.0) 
+		    	     +  pow((randY - G.getY(j)), 2.0)); 
 			if(dist < 1){
 				G.addEdge(i, j, dist);	
 			}
@@ -35,9 +35,9 @@ wirelessNetwork::wirelessNetwork(int size, int n){
 
 	for(int i=0; i<n; i++){
 		G.addVertex(randX, randY); 
-		for(int j=0; j < G.Vertices.size()-1; j++){
-			dist = sqrt(pow(randX - G.Vertices[j].getX()) 
-		    	     + pow(randY - G.Vertices[j].getY())); 
+		for(int j=0; j < G.getNumberVertices(); j++){
+			dist = sqrt(pow((randX - G.getX(j)), 2.0) 
+		    	     +  pow((randY - G.getY(j)), 2.0)); 
 			if(dist < 1){
 				G.addEdge(i, j, dist);	
 			}

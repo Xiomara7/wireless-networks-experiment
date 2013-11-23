@@ -14,16 +14,21 @@ class myGraph {
 				float y; 
 			public:
 				class Data {
+					private:
+						int   ID; 
+						float weight;
 					public:
-						int ID; 
-						float weight; 
+						void  setID(int DestID)  { ID = DestID;   } 
+						void  setWeight(float w) { weight = w;    }
+						float getWeight()        { return weight; } 
+					 	int   getID()            { return ID;     }
 				}; 
 				 
 				Vertex(){ x = 0; 
 						  y = 0; }
 				vector <Data> adjacencyList;
-			 	void setX(float n){ x = n; }
-			 	void setY(float n){ y = n; }
+			 	void  setX(float n){ x = n; }
+			 	void  setY(float n){ y = n; }
 				float getX() { return x; }
 				float getY() { return y; }
 		};

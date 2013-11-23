@@ -1,0 +1,52 @@
+#include <iostream>
+#include <vector>
+
+#ifndef GRAPH
+#define GRAPH
+
+typedef float ElementType; 
+using namespace std;  
+
+class myGraph {
+	private: 
+		class Vertex {
+			private:
+				float x; 
+				float y; 
+			public:
+				class Data {
+					public:
+						int ID; 
+						float weight; 
+				}; 
+				 
+				Vertex(){ x = 0; 
+						  y = 0; }
+				vector <Data> adjacencyList;
+			 	void setX(float n){ x = n; }
+			 	void setY(float n){ y = n; }
+			 	float getX() { return x; }
+			 	float getY() { return y; } 
+
+		};
+		vector <Vertex> Vertices;
+
+	public: 
+
+		void addVertex(float x, float y); 
+
+		void addEdge(int OrigID, int DestID, float weight); 
+
+		void deleteVertex(int pos); 
+
+		void deleteEdge(int Vertex, int Edge); 
+
+		int getNeighbors(int Vertex);
+
+		int getNumberVertices(); 
+
+		int getNumberEdges(int Vertex);  
+	
+}; 
+	
+#endif

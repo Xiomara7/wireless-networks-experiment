@@ -29,29 +29,74 @@ class myGraph {
 				vector <Data> adjacencyList;
 			 	void  setX(float n){ x = n; }
 			 	void  setY(float n){ y = n; }
-				float getX() { return x; }
-				float getY() { return y; }
+				float getX() { return x;    }
+				float getY() { return y;    }
 		};
 		vector <Vertex> Vertices;
 
-	public: 
+	public:  
 
-		void addVertex(float x, float y); 
+		/**
+		 * [addVertex description]
+		 * @param  x [description]
+		 * @param  y [description]
+		 * @return   [description]
+		 */
+		void  addVertex(float x, float y);
 
-		void addEdge(int OrigID, int DestID, float weight); 
+		/**
+		 * [addEdge description]
+		 * @param  OrigID [description]
+		 * @param  DestID [description]
+		 * @param  weight [description]
+		 * @return        [description]
+		 */
+		void  addEdge(int OrigID, int DestID, float weight);
 
-		void deleteVertex(int pos); 
+		/**
+		 * [deleteVertex description]
+		 * @param  pos [description]
+		 * @return     [description]
+		 */
+		void  deleteVertex(int pos);
 
-		void deleteEdge(int Vertex, int Edge); 
+		/**
+		 * [deleteEdge description]
+		 * @param  Vertex [description]
+		 * @param  Edge   [description]
+		 * @return        [description]
+		 */
+		void  deleteEdge(int Vertex, int Edge);
 
-		void getNeighbors(vector <int> neighbors, int pos); 
+		 /**
+		  * [getNeighbors description]
+		  * @param  neighbors [description]
+		  * @param  pos       [description]
+		  * @return           [description]
+		  */
+		void  getNeighbors(vector <int> neighbors, int pos);
 
-		int getNumberVertices(); 
+		/**
+		 * [getNumberVertices description]
+		 * @return [description]
+		 */
+		int   getNumberVertices();
 
-		int getNumberEdges(int Vertex);  
+		/**
+		 * [getNumberEdges description]
+		 * @param  Vertex [description]
+		 * @return        [description]
+		 */
+		int   getNumberEdges(int Vertex);
+
+		/*
 		
+		 */
 		float getX(int pos) { return Vertices[pos].getX(); }
-
+		
+		/*
+		
+		 */
 		float getY(int pos) { return Vertices[pos].getY(); } 
 
 }; 

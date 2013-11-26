@@ -6,6 +6,9 @@
 #define NETWORK
 
 class wirelessNetwork {
+	private: 
+		myGraph G; 
+
 	public: 
 
 		/**
@@ -31,6 +34,8 @@ class wirelessNetwork {
 		 * @return   [description]
 		 */
 		//int compassRouting(myGraph::Vertex s, myGraph::Vertex t); 
+		
+		void degree(); 
 }; 
 
 #endif

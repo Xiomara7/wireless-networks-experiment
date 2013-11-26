@@ -19,7 +19,7 @@ void myGraph::addEdge(int OrigID, int DestID, float weight){
 	D.setWeight(weight); 
 
 	// Set the last position with the edge data.
-	Vertices[OrigID].adjacencyList[Adjsize -1] = D; 
+	Vertices[OrigID].adjacencyList.push_back(D); 
 }
 
 void myGraph::deleteVertex(int pos){	 
@@ -38,8 +38,9 @@ void myGraph::deleteEdge(int Vertex, int Edge){
 }
 	
 void myGraph::getNeighbors(vector <int> neighbors, int pos){
-	for(int i=0; i<Vertices[pos].adjacencyList.size(); i++){
-		neighbors[i] = Vertices[pos].adjacencyList[i].getID(); 
+	for(int i=0; i<Vertices[pos].adjacencyList.size() -1; i++){
+		cout << Vertices[pos].adjacencyList[i].getID() << endl; 
+		neighbors.push_back(Vertices[pos].adjacencyList[i].getID()); 
 	}
 }
 

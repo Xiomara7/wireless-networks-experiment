@@ -22,8 +22,7 @@ or not.*/
 int main (){
 
 	//Generate wireless networks:
-	
-	wirelessNetwork UDG500; 
+	wirelessNetwork UDG500;  
 	wirelessNetwork UDG550(10, 550);
 	wirelessNetwork UDG600(10, 600);
 	wirelessNetwork UDG650(10, 650);
@@ -34,9 +33,17 @@ int main (){
 	wirelessNetwork UDG900(10, 900);
 	wirelessNetwork UDG950(10, 950);
 
-
-
-
+	UDG500.degree();
+	/*UDG550.degree(); 
+	UDG600.degree(); 
+	UDG650.degree(); 
+	UDG700.degree(); 
+	UDG750.degree(); 
+	UDG800.degree(); 
+	UDG850.degree(); 
+	UDG900.degree(); 
+	UDG950.degree(); */
+	
 /*
 Generate a wireless network G with 1000 points 
 distributed on a 10 × 10 square. Then repeat the
@@ -50,7 +57,7 @@ not and if it was, report on the length of the path
 from s to t that was discovered. Present your results 
 in a tabular form.*/
 
-	wirelessNetwork UDG1000(10, 1000);
+	
 
 
 /*

@@ -8,7 +8,6 @@ using namespace std;
 
 wirelessNetwork::wirelessNetwork(){
 	srand(time(NULL)); 
-	myGraph G; 
 	float dist; 
 	float randX = rand() % 10; 
 	float randY = rand() % 10;
@@ -19,16 +18,14 @@ wirelessNetwork::wirelessNetwork(){
 			dist = sqrt(pow((randX - G.getX(j)), 2.0) 
 		    	     +  pow((randY - G.getY(j)), 2.0)); 
 			if(dist < 1){
-				G.addEdge(i, j, dist);	
+				G.addEdge(i, j, dist);
 			}
 		}
 	}
 }
 
-
 wirelessNetwork::wirelessNetwork(int size, int n){
 	srand(time(NULL)); 
-	myGraph G; 
 	float dist; 
 	float randX = rand() % size; 
 	float randY = rand() % size;
@@ -45,25 +42,42 @@ wirelessNetwork::wirelessNetwork(int size, int n){
 	}
 }
 
+void wirelessNetwork::degree(){
+	vector <int> neighbors; 
+	int sum = 0; 
+	int average, max; 
+	for(int i=0; i < G.getNumberVertices(); i++){
+			G.getNeighbors(neighbors, i); 
+			sum += neighbors.size();
+			cout << "sum: " << sum << endl; 
+	}
+	cout << "sum total: " << sum << endl; 
+	average = sum / G.getNumberVertices(); 
 
-myGraph wirelessNetwork::TopologyControl(myGraph G){
-	
-	/*Input: A UDG G = (V,E).
-	Output the graph H = (V,E ) where E = {(u, v) | v ∈ N(u)}.
+	cout << "The average degree: " << average << endl; 
+	cout << "The maximum degree: " << max << endl; 
+}
 
-	for each vertex u ∈ V do
-   	temp := N(u)
-   	for each neighbor v ∈ N(u) do
-    if u and v have a common neighbor w such that|uw|<|uv| and |vw|<|uv| then
-    temp := temp − {v}
-   	N (u) := temp*/
+/*myGraph wirelessNetwork::TopologyControl(myGraph G){
 
 	myGraph H; 
+
+
+	for(int i=0; i< ; i++){
+		/*for each vertex u ∈ V do
+   		temp := N(u)
+   		for each neighbor v ∈ N(u) do
+    	if u and v have a common neighbor w such that|uw|<|uv| and |vw|<|uv| then
+    	temp := temp − {v}
+   		N (u) := temp
+	}
+
+	return H; 
 }
 
 //int wirelessNetwork::compassRouting(myGraph::Vertex s, myGraph::Vertex t){
 	
-	/*if the current vertex x equals t, 
+	if the current vertex x equals t, 
 	then we are done; otherwise find 
 	a neighbor v of x that makes the 
 	smallest angle with the direction 

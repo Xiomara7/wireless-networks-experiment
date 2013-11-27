@@ -32,15 +32,15 @@ void myGraph::deleteVertex(int pos){
 	}
 }
 	
-void myGraph::deleteEdge(int Vertex, int Edge){
-	Vertices[Vertex].adjacencyList[Edge].setID(-1); 
-	Vertices[Vertex].adjacencyList[Edge].setWeight(0); 
+void myGraph::deleteEdge(int V1, int V2){
+	Vertices[V1].adjacencyList[V2].setID(-1); 
+	Vertices[V1].adjacencyList[V2].setWeight(0); 
 }
 	
-void myGraph::getNeighbors(vector <int> neighbors, int pos){
+void myGraph::getNeighbors(vector <int> &neighbors, int pos){
 	for(int i=0; i<Vertices[pos].adjacencyList.size() -1; i++){
-		cout << Vertices[pos].adjacencyList[i].getID() << endl; 
-		neighbors.push_back(Vertices[pos].adjacencyList[i].getID()); 
+		neighbors.push_back(Vertices[pos].adjacencyList[i].getID());
+		
 	}
 }
 

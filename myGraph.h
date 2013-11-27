@@ -36,69 +36,66 @@ class myGraph {
 
 	public:  
 
-		/**
-		 * [addVertex description]
-		 * @param  x [description]
-		 * @param  y [description]
-		 * @return   [description]
-		 */
 		void  addVertex(float x, float y);
-
 		/**
-		 * [addEdge description]
-		 * @param  OrigID [description]
-		 * @param  DestID [description]
-		 * @param  weight [description]
-		 * @return        [description]
+		 * [addVertex Añadir un nodo al grafo]
+		 * @param   x  [Coordenada X del nodo]
+		 * @param   y  [Coordenada Y del nodo]
 		 */
+
 		void  addEdge(int OrigID, int DestID, float weight);
-
 		/**
-		 * [deleteVertex description]
-		 * @param  pos [description]
-		 * @return     [description]
+		 * [addEdge  Añadir arista de un nodo a otro]
+		 * @param  OrigID [ID del nodo origen]
+		 * @param  DestID [ID del nodo destinatario ]
+		 * @param  weight [distancia entre los nodos]
 		 */
+
 		void  deleteVertex(int pos);
-
 		/**
-		 * [deleteEdge description]
-		 * @param  Vertex [description]
-		 * @param  Edge   [description]
-		 * @return        [description]
+		 * [deleteVertex Borrar un nodo del grafo]
+		 * @param pos [posición del nodo]
 		 */
-		void  deleteEdge(int Vertex, int Edge);
 
+		void  deleteEdge(int V1, int V2);
+		/**
+		 * [deleteEdge Borrar una arista]
+		 * @param  V1 [Nodo Origen ]
+		 * @param  V2 [Nodo Destino]
+		 */
+
+		void  getNeighbors(vector <int> &neighbors, int pos);
 		 /**
 		  * [getNeighbors description]
 		  * @param  neighbors [description]
 		  * @param  pos       [description]
 		  * @return           [description]
 		  */
-		void  getNeighbors(vector <int> neighbors, int pos);
+		
 
+		int   getNumberVertices();
 		/**
 		 * [getNumberVertices description]
 		 * @return [description]
 		 */
-		int   getNumberVertices();
 
+		int   getNumberEdges(int Vertex);
 		/**
 		 * [getNumberEdges description]
 		 * @param  Vertex [description]
 		 * @return        [description]
 		 */
-		int   getNumberEdges(int Vertex);
 
-		/*
-		
-		 */
 		float getX(int pos) { return Vertices[pos].getX(); }
-		
 		/*
 		
 		 */
+		
 		float getY(int pos) { return Vertices[pos].getY(); } 
-
+		/*
+		
+		 */
+		
 }; 
 
 #endif

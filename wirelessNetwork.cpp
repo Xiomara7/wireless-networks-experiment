@@ -11,8 +11,11 @@ wirelessNetwork::wirelessNetwork(){
 	float dist; 
 	float randX = rand() % 10; 
 	float randY = rand() % 10;
+	G.addVertex(randX, randY); 
 
 	for(int i=0; i<500; i++){
+		randX = rand() % 10; 
+		randY = rand() % 10;
 		G.addVertex(randX, randY); 
 		for(int j=0; j < G.getNumberVertices(); j++){
 			dist = sqrt(pow((randX - G.getX(j)), 2.0) 
@@ -43,15 +46,16 @@ wirelessNetwork::wirelessNetwork(int size, int n){
 }
 
 void wirelessNetwork::degree(){
-	vector <int> neighbors; 
 	int sum = 0; 
-	int average, max; 
-	for(int i=0; i < G.getNumberVertices(); i++){
+	int average, max = 0; 
+	for(int i=0; i < G.getNumberVertices()-1; i++){
+			vector <int> neighbors; 
 			G.getNeighbors(neighbors, i); 
 			sum += neighbors.size();
-			cout << "sum: " << sum << endl; 
+			if( neighbors.size() > max){ 
+				max = neighbors.size();
+			}
 	}
-	cout << "sum total: " << sum << endl; 
 	average = sum / G.getNumberVertices(); 
 
 	cout << "The average degree: " << average << endl; 

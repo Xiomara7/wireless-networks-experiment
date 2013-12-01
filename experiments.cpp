@@ -33,7 +33,29 @@ int main (){
 	wirelessNetwork UDG900(10, 900);
 	wirelessNetwork UDG950(10, 950);
 
-	//UDG500.degree();
+	UDG500.degree();
+	UDG550.degree(); 
+	UDG600.degree(); 
+	UDG650.degree(); 
+	UDG700.degree(); 
+	UDG750.degree(); 
+	UDG800.degree(); 
+	UDG850.degree(); 
+	UDG900.degree(); 
+	UDG950.degree(); 
+
+	/*UDG500.TopologyControl(); 
+	UDG550.TopologyControl(); 
+	UDG600.TopologyControl(); 
+	UDG650.TopologyControl(); 
+	UDG700.TopologyControl(); 
+	UDG750.TopologyControl(); 
+	UDG800.TopologyControl(); 
+	UDG850.TopologyControl(); 
+	UDG900.TopologyControl(); 
+	UDG950.TopologyControl(); */
+
+	UDG500.degree();
 	UDG550.degree(); 
 	UDG600.degree(); 
 	UDG650.degree(); 

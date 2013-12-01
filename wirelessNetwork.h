@@ -25,7 +25,7 @@ class wirelessNetwork {
 		 * [TopologyControl description]
 		 * @return [description]
 		 */
-		myGraph TopologyControl(myGraph G);
+		myGraph TopologyControl();
 
 		/**
 		 * [compassRouting description]

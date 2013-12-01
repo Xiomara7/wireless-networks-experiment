@@ -51,7 +51,6 @@ wirelessNetwork::wirelessNetwork(int size, int n){
 void wirelessNetwork::degree(){
 	int sum = 0; 
 	int average, max = 0; 
-	cout << "vertices: " << G.getNumberVertices() << endl; 
 	for(int i=0; i < G.getNumberVertices()-1; i++){
 			vector <int> neighbors; 
 			G.getNeighbors(neighbors, i); 
@@ -80,18 +79,22 @@ void wirelessNetwork::printGraph(){
 }
 
 /*myGraph wirelessNetwork::TopologyControl(myGraph G){
-	myGraph H;
+	myGraph H; 
 	vector <int> neighbors1;  
-	vector <int> neighbors2;  
-	vector <int> temp; 
+	vector <int> neighbors2;
+	vector <int> temp;  
+	temp = neighbors1; 
 	for(int i=0; i < G.getNumberVertices()-1; i++){
 		G.getNeighbors(neighbors1, i); 
 		G.getNeighbors(neighbors2, neighbors1[i]); 
-		for(int j=1; j < neighbors1.size(); j++){
-			for(int k=0; k < neighbors2.size(); k++){
+		for(int j=1; j < neighbors1.size()-1; j++){
+			for(int k=0; k < neighbors2.size()-1; k++){
 				if(neighbors1[j] == neighbors2[k]){
-					if(dist < dist && dist < dist){
-						//borrar (-1) en el grafo H!!; 
+					if(G.getDistance(i, neighbors2[k]) 
+					<  G.getDistance(i, neighbors1[i])
+					&& G.getDistance(neighbors1[i], neighbors2[k]) 
+					<  G.getDistance(i, neighbors1[i])){
+							temp[i] = -1; 
 					}
 				}
 			}
@@ -101,12 +104,16 @@ void wirelessNetwork::printGraph(){
 	return H; 
 }
 
-int wirelessNetwork::compassRouting(myGraph::Vertex s, myGraph::Vertex t){
-	
-	if the current vertex x equals t, 
-	then we are done; otherwise find 
-	a neighbor v of x that makes the 
-	smallest angle with the direction 
-	xt and do compass routing 
-	with source v and destination t.
-}*/
+int wirelessNetwork::compassRouting(int s, int t){
+	if(s == t){ return; }
+	else{
+		vector <int> neighbors; 
+		G.getNeighbors(neighbors, s); 
+		int min = (atan(getDistance(t, 0) / getDistance(s, t))); 
+		for(int i=1; i<neighbors.size()-1; i++){
+			if((atan(getDistance(t, i) / getDistance(s, t))) < min ){
+				min = atan(getDistance(t, i) / getDistance(s, t)); 
+			}
+		}
+	}	
+ }*/

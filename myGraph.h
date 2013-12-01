@@ -96,6 +96,10 @@ class myGraph {
 		
 		 */
 		
+		float getDistance(int V1, int V2){
+			return Vertices[V1].adjacencyList[V2].getWeight();
+		} 
+		
 }; 
 
 #endif

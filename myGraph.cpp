@@ -17,9 +17,7 @@ void myGraph::addEdge(int OrigID, int DestID, float weight){
 	myGraph::Vertex::Data D; 	
 	D.setID(DestID);  
 	D.setWeight(weight); 
-
-	cout << "w: " << weight << endl; 
-
+	
 	// Set the last position with the edge data.
 	Vertices[OrigID].adjacencyList.push_back(D); 
 }

@@ -33,7 +33,7 @@ int main (){
 	wirelessNetwork UDG900(10, 900);
 	wirelessNetwork UDG950(10, 950);
 
-	UDG500.degree();
+	//UDG500.degree();
 	UDG550.degree(); 
 	UDG600.degree(); 
 	UDG650.degree(); 
@@ -43,7 +43,9 @@ int main (){
 	UDG850.degree(); 
 	UDG900.degree(); 
 	UDG950.degree(); 
-	
+
+	//UDG500.printGraph();   
+
 /*
 Generate a wireless network G with 1000 points 
 distributed on a 10 × 10 square. Then repeat the

@@ -8,4 +8,4 @@ wirelessNetwork.o: wirelessNetwork.cpp wirelessNetwork.h
 	g++ -c wirelessNetwork.cpp
 
 clean:
-	rm *.o myGraph *.h.gch
+	rm *.o *.h.gch experiments

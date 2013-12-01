@@ -36,6 +36,8 @@ class wirelessNetwork {
 		//int compassRouting(myGraph::Vertex s, myGraph::Vertex t); 
 		
 		void degree(); 
+
+		void printGraph(); 
 }; 
 
 #endif

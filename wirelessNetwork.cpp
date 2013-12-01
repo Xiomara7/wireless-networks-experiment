@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <fstream>
 #include "stdlib.h"
 #include "myGraph.h"
 #include "wirelessNetwork.h"
@@ -9,17 +10,17 @@ using namespace std;
 wirelessNetwork::wirelessNetwork(){
 	srand(time(NULL)); 
 	float dist; 
-	float randX = rand() % 10; 
-	float randY = rand() % 10;
+	float randX = ((double)rand()/(double)RAND_MAX)*10.0;
+	float randY = ((double)rand()/(double)RAND_MAX)*10.0;
 	G.addVertex(randX, randY); 
 
-	for(int i=0; i<500; i++){
-		randX = rand() % 10; 
-		randY = rand() % 10;
+	for(int i=0; i<500-1; i++){
+		randX = ((double)rand()/(double)RAND_MAX)*10.0;
+		randY = ((double)rand()/(double)RAND_MAX)*10.0;
 		G.addVertex(randX, randY); 
 		for(int j=0; j < G.getNumberVertices(); j++){
-			dist = sqrt(pow((randX - G.getX(j)), 2.0) 
-		    	     +  pow((randY - G.getY(j)), 2.0)); 
+			dist = sqrt(pow(abs(randX - G.getX(j)), 2.0) 
+		    	     +  pow(abs(randY - G.getY(j)), 2.0)); 
 			if(dist < 1){
 				G.addEdge(i, j, dist);
 			}
@@ -30,16 +31,18 @@ wirelessNetwork::wirelessNetwork(){
 wirelessNetwork::wirelessNetwork(int size, int n){
 	srand(time(NULL)); 
 	float dist; 
-	float randX = rand() % size; 
-	float randY = rand() % size;
-
-	for(int i=0; i<n; i++){
+	float randX = ((double)rand()/(double)RAND_MAX)*size;
+	float randY = ((double)rand()/(double)RAND_MAX)*size;
+	G.addVertex(randX, randY); 
+	for(int i=0; i<n-1; i++){
+		randX = ((double)rand()/(double)RAND_MAX)*size;
+		randY = ((double)rand()/(double)RAND_MAX)*size; 
 		G.addVertex(randX, randY); 
-		for(int j=0; j < G.getNumberVertices(); j++){
-			dist = sqrt(pow((randX - G.getX(j)), 2.0) 
-		    	     +  pow((randY - G.getY(j)), 2.0)); 
+		for(int j=0; j < G.getNumberVertices()-1; j++){
+			dist = sqrt(pow(abs(randX - G.getX(j)), 2.0) 
+		    	     +  pow(abs(randY - G.getY(j)), 2.0)); 
 			if(dist < 1){
-				G.addEdge(i, j, dist);	
+				G.addEdge(i, j, dist);
 			}
 		}
 	}
@@ -48,6 +51,7 @@ wirelessNetwork::wirelessNetwork(int size, int n){
 void wirelessNetwork::degree(){
 	int sum = 0; 
 	int average, max = 0; 
+	cout << "vertices: " << G.getNumberVertices() << endl; 
 	for(int i=0; i < G.getNumberVertices()-1; i++){
 			vector <int> neighbors; 
 			G.getNeighbors(neighbors, i); 
@@ -62,24 +66,42 @@ void wirelessNetwork::degree(){
 	cout << "The maximum degree: " << max << endl; 
 }
 
-/*myGraph wirelessNetwork::TopologyControl(myGraph G){
-
-	myGraph H; 
-
-
-	for(int i=0; i< ; i++){
-		/*for each vertex u ∈ V do
-   		temp := N(u)
-   		for each neighbor v ∈ N(u) do
-    	if u and v have a common neighbor w such that|uw|<|uv| and |vw|<|uv| then
-    	temp := temp − {v}
-   		N (u) := temp
+void wirelessNetwork::printGraph(){
+	ofstream graph;
+	graph.open("file.txt");
+	for(int i=0; i<G.getNumberVertices()-1; i++){ 
+		vector<int> neighbors;
+		G.getNeighbors(neighbors, i); 
+		for(int j=0; j<neighbors.size(); j++){
+			graph << i << "--" << neighbors[j] << endl; 
+		}
 	}
+	graph.close(); 
+}
 
+/*myGraph wirelessNetwork::TopologyControl(myGraph G){
+	myGraph H;
+	vector <int> neighbors1;  
+	vector <int> neighbors2;  
+	vector <int> temp; 
+	for(int i=0; i < G.getNumberVertices()-1; i++){
+		G.getNeighbors(neighbors1, i); 
+		G.getNeighbors(neighbors2, neighbors1[i]); 
+		for(int j=1; j < neighbors1.size(); j++){
+			for(int k=0; k < neighbors2.size(); k++){
+				if(neighbors1[j] == neighbors2[k]){
+					if(dist < dist && dist < dist){
+						//borrar (-1) en el grafo H!!; 
+					}
+				}
+			}
+
+		}
+	}
 	return H; 
 }
 
-//int wirelessNetwork::compassRouting(myGraph::Vertex s, myGraph::Vertex t){
+int wirelessNetwork::compassRouting(myGraph::Vertex s, myGraph::Vertex t){
 	
 	if the current vertex x equals t, 
 	then we are done; otherwise find 

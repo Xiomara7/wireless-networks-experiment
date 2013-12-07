@@ -8,4 +8,13 @@ wirelessNetwork.o: wirelessNetwork.cpp wirelessNetwork.h
 	g++ -c wirelessNetwork.cpp
 
 clean:
-	rm *.o *.h.gch experiments
+	rm *.o experiments
+
+before: 
+	dot -Kfdp -n -Tpdf -o before.pdf before.dot
+
+after:
+	dot -Kfdp -n -Tpdf -o after.pdf after.dot
+
+data: 
+	dot -Kfdp -n -Tpdf -o data.pdf data.dot

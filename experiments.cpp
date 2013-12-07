@@ -1,28 +1,27 @@
 #include <iostream>
 #include "wirelessNetwork.h"
 #include "myGraph.h"
+#include <cmath>
+
 
 using namespace std; 
-/*
-Generate 10 wireless networks modeled as UDGs, 
-by distributingn = 500, 550, 600, 650, 700, 750, 
-800, 850, 900, 950 points on a 10 × 10 grid. For 
-each network, report the average degree and the 
-maximum degree. Recall that the degree of a vertex 
-is equal to the number of neighbors it has. Plot 
-these, showing how they increase with respect to n. 
-Run topology control on each of these networks to 
-produce 10 new and much sparser networks. Report 
-and plot the average and maximum degree of these 
-10 networks as well. Based on your data and plots, 
-write 2-3 sentences commenting on whether performing 
-topology control has resulted in a much sparser graph 
-or not.*/
+
+/* Generate 10 wireless networks modeled as UDGs, by distributingn = 500,
+   550, 600, 650, 700, 750, 800, 850, 900, 950 points on a 10 × 10 grid. 
+
+   report the average degree and the maximum degree. Plot these, showing 
+   how they increase with respect to n. 
+
+   Run topology control on each of these networks to produce 10 new and 
+   much sparser networks. Report and plot the average and maximum degree
+   of these 10 networks as well. Based on your data and plots, write 2-3
+   sentences commenting on whether performing topology control has
+   resulted in a much sparser graph or not.*/
 
 int main (){
 
 	//Generate wireless networks:
-	wirelessNetwork UDG500;  
+	wirelessNetwork UDG500;
 	wirelessNetwork UDG550(10, 550);
 	wirelessNetwork UDG600(10, 600);
 	wirelessNetwork UDG650(10, 650);
@@ -33,6 +32,7 @@ int main (){
 	wirelessNetwork UDG900(10, 900);
 	wirelessNetwork UDG950(10, 950);
 
+	cout << "All degree's networks before Topology Control\n"; 
 	UDG500.degree();
 	UDG550.degree(); 
 	UDG600.degree(); 
@@ -42,9 +42,9 @@ int main (){
 	UDG800.degree(); 
 	UDG850.degree(); 
 	UDG900.degree(); 
-	UDG950.degree(); 
+	UDG950.degree();  
 
-	/*UDG500.TopologyControl(); 
+	UDG500.TopologyControl(); 
 	UDG550.TopologyControl(); 
 	UDG600.TopologyControl(); 
 	UDG650.TopologyControl(); 
@@ -53,8 +53,9 @@ int main (){
 	UDG800.TopologyControl(); 
 	UDG850.TopologyControl(); 
 	UDG900.TopologyControl(); 
-	UDG950.TopologyControl(); */
+	UDG950.TopologyControl(); 
 
+	cout << "All degree's networks after Topology Control\n"; 
 	UDG500.degree();
 	UDG550.degree(); 
 	UDG600.degree(); 
@@ -66,10 +67,7 @@ int main (){
 	UDG900.degree(); 
 	UDG950.degree(); 
 
-	//UDG500.printGraph();   
-
-/*
-Generate a wireless network G with 1000 points 
+/*Generate a wireless network G with 1000 points 
 distributed on a 10 × 10 square. Then repeat the
 following 10 times. Uniformly at random, pick a 
 vertex and designate it as the source s and again 
@@ -80,11 +78,38 @@ compassrouting was able to find the destination or
 not and if it was, report on the length of the path 
 from s to t that was discovered. Present your results 
 in a tabular form.*/
-
-	
-
-
 /*
+	wirelessNetwork UDGa1000(10, 1000);	
+	wirelessNetwork UDGb1000(10, 1000);
+	wirelessNetwork UDGc1000(10, 1000);
+	wirelessNetwork UDGd1000(10, 1000);
+	wirelessNetwork UDGe1000(10, 1000);
+	wirelessNetwork UDGf1000(10, 1000);
+	wirelessNetwork UDGg1000(10, 1000);
+	wirelessNetwork UDGg1000(10, 1000);
+	wirelessNetwork UDGi1000(10, 1000);
+	wirelessNetwork UDGj1000(10, 1000);
+
+	srand(time(NULL)); 
+
+	int s, t; 
+
+	s = rand()%1000; 
+	t = rand()%1000; 
+
+	UDGa1000.compassRouting(s, t); 
+	UDGb1000.compassRouting(s, t);  
+	UDGc1000.compassRouting(s, t);  
+	UDGd1000.compassRouting(s, t);   
+	UDGd1000.compassRouting(s, t);    
+	UDGe1000.compassRouting(s, t);    
+	UDGf1000.compassRouting(s, t);    
+	UDGg1000.compassRouting(s, t);    
+	UDGh1000.compassRouting(s, t);    
+	UDGi1000.compassRouting(s, t);    
+	UDGj1000.compassRouting(s, t); 
+
+
 Start with the same wireless network G generated for 
 Experiment (2) and run topology control on it to get 
 a sparser network H. Run Experiment (2) again, but use 
@@ -96,8 +121,32 @@ explain your observations. Place the code for your
 experiments in a single file called experiments.cpp. 
 The code in the file experiments.cpp makes extensive 
 calls to methods in the wirelessNetwork class and 
-possibly to methods in the myGraph class as well.
- */	
+possibly to methods in the myGraph class as well. 	
+
+	UDGa1000.TopologyControl(); 
+	UDGb1000.TopologyControl(); 
+	UDGc1000.TopologyControl(); 
+	UDGd1000.TopologyControl(); 
+	UDGd1000.TopologyControl(); 
+	UDGe1000.TopologyControl(); 
+	UDGf1000.TopologyControl(); 
+	UDGg1000.TopologyControl(); 
+	UDGh1000.TopologyControl(); 
+	UDGi1000.TopologyControl(); 
+	UDGj1000.TopologyControl(); 
+
+	UDGa1000.compassRouting(s, t); 
+	UDGb1000.compassRouting(s, t);  
+	UDGc1000.compassRouting(s, t);  
+	UDGd1000.compassRouting(s, t);   
+	UDGd1000.compassRouting(s, t);    
+	UDGe1000.compassRouting(s, t);    
+	UDGf1000.compassRouting(s, t);    
+	UDGg1000.compassRouting(s, t);    
+	UDGh1000.compassRouting(s, t);    
+	UDGi1000.compassRouting(s, t);    
+	UDGj1000.compassRouting(s, t); 
+*/
 
 	return 0; 
 }

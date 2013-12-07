@@ -25,7 +25,7 @@ class wirelessNetwork {
 		 * [TopologyControl description]
 		 * @return [description]
 		 */
-		myGraph TopologyControl();
+		void TopologyControl();
 
 		/**
 		 * [compassRouting description]
@@ -37,7 +37,7 @@ class wirelessNetwork {
 		
 		void degree(); 
 
-		void printGraph(); 
+		void generateGraph(); 
 }; 
 
 #endif

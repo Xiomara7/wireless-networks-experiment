@@ -31,6 +31,7 @@ class myGraph {
 			 	void  setY(float n){ y = n; }
 				float getX() { return x;    }
 				float getY() { return y;    }
+				int   getID(){ return getID();   }
 		};
 		vector <Vertex> Vertices;
 
@@ -97,7 +98,7 @@ class myGraph {
 		 */
 		
 		float getDistance(int V1, int V2){
-			return Vertices[V1].adjacencyList[V2].getWeight();
+				return Vertices[V1].adjacencyList[V2].getWeight();
 		} 
 		
 }; 

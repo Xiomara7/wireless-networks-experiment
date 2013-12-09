@@ -6,6 +6,8 @@
 
 using namespace std; 
 
+int main (){
+
 /* Generate 10 wireless networks modeled as UDGs, by distributingn = 500,
    550, 600, 650, 700, 750, 800, 850, 900, 950 points on a 10 × 10 grid. 
 
@@ -17,58 +19,21 @@ using namespace std;
    of these 10 networks as well. Based on your data and plots, write 2-3
    sentences commenting on whether performing topology control has
    resulted in a much sparser graph or not.*/
+	int j = 500; 
+	for(int i=0 ; i<10; i++){
+		wirelessNetwork UDG(10, j);
+		
+		cout << "Degree before Topology Control\n"; 
+		UDG.degree();
+		UDG.generateGraph(); 
+		UDG.TopologyControl();
+		cout << "Degree after Topology Control\n"; 
+		UDG.degree();
+		UDG.generateGraph(); 
 
-int main (){
+		j+=50; 
+	}
 
-	//Generate wireless networks:
-	wirelessNetwork UDG500;
-
-	wirelessNetwork UDG550(10, 550);
-	wirelessNetwork UDG600(10, 600);
-	wirelessNetwork UDG650(10, 650);
-	wirelessNetwork UDG700(10, 700); 
-	wirelessNetwork UDG750(10, 750);
-	wirelessNetwork UDG800(10, 800);
-	wirelessNetwork UDG850(10, 850);
-	wirelessNetwork UDG900(10, 900);
-	wirelessNetwork UDG950(10, 950);
-
-	cout << "All degree's networks before Topology Control\n"; 
-	UDG500.degree();
-	UDG550.degree(); 
-	UDG600.degree(); 
-	UDG650.degree(); 
-	UDG700.degree(); 
-	UDG750.degree(); 
-	UDG800.degree(); 
-	UDG850.degree(); 
-	UDG900.degree(); 
-	UDG950.degree();  
-
-	UDG500.generateGraph(); 
-	UDG500.TopologyControl(); 
-	UDG550.TopologyControl(); 
-	UDG600.TopologyControl(); 
-	UDG650.TopologyControl(); 
-	UDG700.TopologyControl(); 
-	UDG750.TopologyControl(); 
-	UDG800.TopologyControl(); 
-	UDG850.TopologyControl(); 
-	UDG900.TopologyControl(); 
-	UDG950.TopologyControl(); 
-
-	cout << "All degree's networks after Topology Control\n"; 
-	UDG500.degree();
-	UDG550.degree(); 
-	UDG600.degree(); 
-	UDG650.degree(); 
-	UDG700.degree(); 
-	UDG750.degree(); 
-	UDG800.degree(); 
-	UDG850.degree(); 
-	UDG900.degree(); 
-	UDG950.degree(); 
-	UDG500.generateGraph(); 
 /*Generate a wireless network G with 1000 points 
 distributed on a 10 × 10 square. Then repeat the
 following 10 times. Uniformly at random, pick a 

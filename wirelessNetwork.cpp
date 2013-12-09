@@ -10,7 +10,7 @@ using namespace std;
 
 wirelessNetwork::wirelessNetwork(){
 	srand(time(NULL)); 
-	float dist; 
+	float dist, dista; 
 	float randX = ((double)rand()/(double)RAND_MAX)*10.0;
 	float randY = ((double)rand()/(double)RAND_MAX)*10.0;
 	G.addVertex(randX, randY); 
@@ -24,9 +24,11 @@ wirelessNetwork::wirelessNetwork(){
 		    	     +  pow(abs(randY - G.getY(j)), 2.0)); 
 			if(dist < 1){
 				G.addEdge(i, j, dist);
+				G.addEdge(j, i, dist);
 			}
 		}
 	}
+
 }
 
 wirelessNetwork::wirelessNetwork(int size, int n){
@@ -44,6 +46,7 @@ wirelessNetwork::wirelessNetwork(int size, int n){
 		    	     +  pow(abs(randY - G.getY(j)), 2.0)); 
 			if(dist < 1){
 				G.addEdge(i, j, dist);
+				G.addEdge(j, i, dist);
 			}
 		}
 	}
@@ -58,15 +61,10 @@ void wirelessNetwork::degree(){
 		vector <int> neighbors; 
 		G.getNeighbors(neighbors, i); 
 		if(neighbors.size() > 0){
-			for(int j=0; j<neighbors.size(); j++){
-				if(neighbors[j] != -1){
-					count++;  		
-				}
-			}
+			for(int j=0; j<neighbors.size(); j++)
+				if(neighbors[j] != -1){ count++; }
 			sum += count; 
-			if( count > max){ 
-				max = count; 
-			}
+			if( count > max){ max = count;}
 		}
 	}
 	
@@ -81,60 +79,74 @@ void wirelessNetwork::TopologyControl(){
 		vector <int> neighbors1;  
 		vector <int> neighbors2;
 		vector <int> temp; 
+		float dist1, dist2, dist3; 
 		G.getNeighbors(neighbors1, i); 
+		G.getNeighbors(temp, i);
 		if(neighbors1.size() != 0){
 			for(int j=0; j < neighbors1.size(); j++){
 				G.getNeighbors(neighbors2, neighbors1[j]);
-				G.getNeighbors(temp, i);
 				if(neighbors2.size() != 0){
-					for(int k=0; k < neighbors2.size(); k++){
-						if(neighbors1[j] == neighbors2[k]){
-							if(G.getDistance(i, neighbors2[k]) <  G.getDistance(i, neighbors1[j])
-							&& G.getDistance(neighbors1[j], neighbors2[k]) <  G.getDistance(i, neighbors1[j])){
-									temp.insert(temp.begin()+j, -1); 
+					for(int k=0; k < neighbors1.size(); k++){
+						for(int l=0; l < neighbors2.size(); l++){
+							if(neighbors1[k] == neighbors2[l]){
+								G.getDistance(i, neighbors2[l], dist1); 
+								G.getDistance(i, neighbors1[j], dist2); 
+								G.getDistance(neighbors1[j], neighbors2[l], dist3); 
+								if((dist1 <  dist2) && (dist3 <  dist2)) {
+									temp.at(j) = -1;
+								}		
 							}
 						}
 					}
 				}
 			}
-		}
-		for(int l=0; l<temp.size(); l++){
-			if(temp[l] == -1){
-				G.deleteEdge(i, l); 
+			for(int m=0; m < temp.size(); m++){
+				if(temp[m] == -1){
+					G.deleteEdge(i, m);
+				}	
 			}
 		}
 	}
 }
 
-/*int wirelessNetwork::compassRouting(int s, int t){
-	if(s == t){ return; }
-	else{
-		vector <int> neighbors; 
-		G.getNeighbors(neighbors, s); 
-		int min = (atan(getDistance(t, 0) / getDistance(s, t))); 
-		for(int i=1; i<neighbors.size()-1; i++){
-			if((atan(getDistance(t, i) / getDistance(s, t))) < min ){
-				min = atan(getDistance(t, i) / getDistance(s, t)); 
+/*vector<int> wirelessNetwork::compassRouting(int s, int t){
+	vector <int> neighbors;
+	vector<int> path;
+	int src; 
+	if(s == t){ return path; }
+	else{ 
+		for(int j=0; j<G.getNumberVertices(); j++){
+			G.getNeighbors(neighbors, s); 
+			int min = (acos(G.getDistance(s,t) / G.getDistance(s, neighbors[0]))); 
+			for(int i=1; i<neighbors.size(); i++){
+				if((acos(G.getDistance(s,t) / G.getDistance(s, neighbors[i]))) < min ){
+					min = acos(G.getDistance(t, i) / G.getDistance(s, t)); 
+					src = i; 
+				}
 			}
+			path.push_back(src); 
 		}
+		return path; 
 	}	
- }
-*/
+ }*/
 
  void wirelessNetwork::generateGraph(){
 	ofstream outputFile; 
 	outputFile.open("data.dot");
-	outputFile << "graph G { \n overlap=false; \n size = \"10,10\"; \n node [shape=circle, fixedsize=true, fontsize=5, width=.50, height=.50];\n"; 
+	outputFile << "graph G { \n overlap=false; \n size = \"10,10\"; \n"; 
+	outputFile << "node [shape=circle, fixedsize=true, fontsize=5, "; 
+	outputFile << "width=.50, height=.50];\n"; 
 
 	for(int j=0; j<G.getNumberVertices(); j++){
-		outputFile << j << "[ pos = \"" << G.getX(j) << "," << G.getY(j) << "\", label = \"" << j << "\" ]" << endl; 
+		outputFile << j << "[ pos = \"" << G.getX(j) << ","; 
+		outputFile << G.getY(j) << "\", label = \"" << j << "\" ]" << endl; 
 	}
 	for(int j=0; j<G.getNumberVertices(); j++){
 		vector<int> v;
 		G.getNeighbors(v, j);
-		for(int k=0; k<v.size(); k++){
-			outputFile << j << "--" << v[k] << ";" << endl; 
-		}
+		for(int k=0; k<v.size(); k++)
+			if(v[k] > j)
+				outputFile << j << "--" << v[k] << ";" << endl; 
 	}
 	outputFile << "}"; 
 	outputFile.close(); 

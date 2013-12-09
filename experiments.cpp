@@ -22,6 +22,7 @@ int main (){
 
 	//Generate wireless networks:
 	wirelessNetwork UDG500;
+
 	wirelessNetwork UDG550(10, 550);
 	wirelessNetwork UDG600(10, 600);
 	wirelessNetwork UDG650(10, 650);
@@ -44,6 +45,7 @@ int main (){
 	UDG900.degree(); 
 	UDG950.degree();  
 
+	UDG500.generateGraph(); 
 	UDG500.TopologyControl(); 
 	UDG550.TopologyControl(); 
 	UDG600.TopologyControl(); 
@@ -66,7 +68,7 @@ int main (){
 	UDG850.degree(); 
 	UDG900.degree(); 
 	UDG950.degree(); 
-
+	UDG500.generateGraph(); 
 /*Generate a wireless network G with 1000 points 
 distributed on a 10 × 10 square. Then repeat the
 following 10 times. Uniformly at random, pick a 

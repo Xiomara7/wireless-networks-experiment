@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <cmath>
 #include "myGraph.h"
 
 
@@ -11,9 +12,6 @@ void myGraph::addVertex(float x, float y){
 }
 
 void myGraph::addEdge(int OrigID, int DestID, float weight){	
-	// Obtaining the size of the vector adjacencyList
-	int Adjsize = Vertices[OrigID].adjacencyList.size();
-
 	myGraph::Vertex::Data D1; 	
 	D1.setID(DestID);  
 	D1.setWeight(weight); 
@@ -59,4 +57,19 @@ int myGraph::getNumberEdges(int Vertex){
 		}
 	} 
 	return sum; 
+}
+
+void myGraph::getDistance(int V1, int V2, float &dist){ 
+	dist = sqrt(pow(abs(getX(V1) - getX(V2)), 2.0) 
+  		      + pow(abs(getY(V1) - getY(V2)), 2.0));
+	//dist = Vertices[V1].adjacencyList[V2].getWeight();
+} 
+
+void myGraph::printVectors(){
+	for(int i=0; i<Vertices.size(); i++){
+		for(int j=0; j<Vertices[i].adjacencyList.size(); j++){
+			//cout << "Vertices: " << Vertices[i].adjacencyList[j].getWeight() << endl ; 
+		}
+		
+	}	
 }

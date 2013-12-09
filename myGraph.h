@@ -19,7 +19,8 @@ class myGraph {
 						float weight;
 					public:
 						void  setID(int DestID)  { ID = DestID;   } 
-						void  setWeight(float w) { weight = w;    }
+						void  setWeight(float w) { weight = w;    
+						}
 						float getWeight()        { return weight; } 
 					 	int   getID()            { return ID;     }
 				}; 
@@ -66,40 +67,13 @@ class myGraph {
 		 */
 
 		void  getNeighbors(vector <int> &neighbors, int pos);
-		 /**
-		  * [getNeighbors description]
-		  * @param  neighbors [description]
-		  * @param  pos       [description]
-		  * @return           [description]
-		  */
-		
-
 		int   getNumberVertices();
-		/**
-		 * [getNumberVertices description]
-		 * @return [description]
-		 */
-
 		int   getNumberEdges(int Vertex);
-		/**
-		 * [getNumberEdges description]
-		 * @param  Vertex [description]
-		 * @return        [description]
-		 */
-
 		float getX(int pos) { return Vertices[pos].getX(); }
-		/*
-		
-		 */
-		
 		float getY(int pos) { return Vertices[pos].getY(); } 
-		/*
 		
-		 */
-		
-		float getDistance(int V1, int V2){
-				return Vertices[V1].adjacencyList[V2].getWeight();
-		} 
+		void getDistance(int V1, int V2, float &dist); 
+		void printVectors(); 
 		
 }; 
 

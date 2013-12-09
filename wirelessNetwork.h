@@ -8,16 +8,15 @@
 class wirelessNetwork {
 	private: 
 		myGraph G; 
-
 	public: 
 
 		/**
-		 * 
+		 * DEFAULT CONSTRUCTOR
 		 */
 		wirelessNetwork();
 
 		/**
-		 * 
+		 * CONSTRUCTOR WITH PARAMETERS
 		 */
 		wirelessNetwork(int size, int n);  
 		
@@ -36,7 +35,6 @@ class wirelessNetwork {
 		//int compassRouting(myGraph::Vertex s, myGraph::Vertex t); 
 		
 		void degree(); 
-
 		void generateGraph(); 
 }; 
 

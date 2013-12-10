@@ -32,10 +32,10 @@ class wirelessNetwork {
 		 * @param  t [description]
 		 * @return   [description]
 		 */
-		//int compassRouting(myGraph::Vertex s, myGraph::Vertex t); 
+		int compassRouting(int s, int t); 
 		
 		void degree(); 
-		void generateGraph(); 
+		void generateGraph(string filename); 
 }; 
 
 #endif

@@ -10,11 +10,9 @@ wirelessNetwork.o: wirelessNetwork.cpp wirelessNetwork.h
 clean:
 	rm *.o experiments
 
-before: 
-	dot -Kfdp -n -Tpdf -o before.pdf before.dot
+dot:
+	bash convert.sh
 
-after:
-	dot -Kfdp -n -Tpdf -o after.pdf after.dot
 
-data: 
-	dot -Kfdp -n -Tpdf -o data.pdf data.dot
+
+

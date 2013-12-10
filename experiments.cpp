@@ -1,10 +1,20 @@
 #include <iostream>
+#include <cmath>
+#include <sstream>
 #include "wirelessNetwork.h"
 #include "myGraph.h"
-#include <cmath>
+#include "stdlib.h"
+
 
 
 using namespace std; 
+
+	template <typename T>	
+	string toStr(T a) {
+ 	stringstream s;
+ 	s << a;
+ 	return s.str();
+	}
 
 int main (){
 
@@ -19,17 +29,21 @@ int main (){
    of these 10 networks as well. Based on your data and plots, write 2-3
    sentences commenting on whether performing topology control has
    resulted in a much sparser graph or not.*/
+
 	int j = 500; 
+	
 	for(int i=0 ; i<10; i++){
+		string name1 = toStr(i) + "before.dot"; 
+		string name2 = toStr(i) + "after.dot"; 
 		wirelessNetwork UDG(10, j);
 		
-		cout << "Degree before Topology Control\n"; 
+		//cout << "Degree before Topology Control\n"; 
 		UDG.degree();
-		UDG.generateGraph(); 
+		UDG.generateGraph(name1); 
 		UDG.TopologyControl();
-		cout << "Degree after Topology Control\n"; 
+		//cout << "Degree after Topology Control\n"; 
 		UDG.degree();
-		UDG.generateGraph(); 
+		UDG.generateGraph(name2); 
 
 		j+=50; 
 	}
@@ -45,7 +59,7 @@ int main (){
 
 
 	for(int i=0; i<10; i++){
-		wirelessNetwork UDG1000(10, 1000);			
+		wirelessNetwork UDGa1000(10, 1000);			
 		srand(time(NULL)); 
 
 		int s, t; 
@@ -53,7 +67,8 @@ int main (){
 		s = rand()%1000; 
 		t = rand()%1000; 
 
-		UDG1000.compassRouting(s, t);  
+		cout << "length of the path: "; 
+		cout << UDGa1000.compassRouting(s, t) << endl;  
 	
 	}	
 
@@ -69,8 +84,17 @@ int main (){
 */
 
 	for(int i=0; i<=10; i++){
-		UDG1000.TopologyControl(); 	
-		UDG1000.compassRouting(s, t); 
+		wirelessNetwork UDGb1000(10, 1000);			
+		srand(time(NULL)); 
+
+		int s, t; 
+
+		s = rand()%1000; 
+		t = rand()%1000; 
+
+		UDGb1000.TopologyControl(); 	
+		cout << "length of the path: "; 
+		cout << UDGb1000.compassRouting(s, t) << endl; 
 	}
 	
 	return 0; 

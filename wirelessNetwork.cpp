@@ -8,16 +8,17 @@
 
 using namespace std; 
 
+
 wirelessNetwork::wirelessNetwork(){
 	srand(time(NULL)); 
 	float dist, dista; 
-	float randX = ((double)rand()/(double)RAND_MAX)*10.0;
-	float randY = ((double)rand()/(double)RAND_MAX)*10.0;
+	float randX = (double)(rand() % 10000) / 1000; 
+	float randY = (double)(rand() % 10000) / 1000; 
 	G.addVertex(randX, randY); 
 
 	for(int i=1; i<500; i++){
-		randX = ((double)rand()/(double)RAND_MAX)*10.0;
-		randY = ((double)rand()/(double)RAND_MAX)*10.0;
+		randX = (double)(rand() % 10000) / 1000; 
+		randY = (double)(rand() % 10000) / 1000; 
 		G.addVertex(randX, randY); 
 		for(int j=0; j < G.getNumberVertices()-1; j++){
 			dist = sqrt(pow(abs(randX - G.getX(j)), 2.0) 
@@ -34,12 +35,12 @@ wirelessNetwork::wirelessNetwork(){
 wirelessNetwork::wirelessNetwork(int size, int n){
 	srand(time(NULL)); 
 	float dist; 
-	float randX = ((double)rand()/(double)RAND_MAX)*size;
-	float randY = ((double)rand()/(double)RAND_MAX)*size;
+	float randX = (double)(rand() % 100) / 10; 
+	float randY = (double)(rand() % 100) / 10; 
 	G.addVertex(randX, randY); 
 	for(int i=1; i<n; i++){
-		randX = ((double)rand()/(double)RAND_MAX)*size;
-		randY = ((double)rand()/(double)RAND_MAX)*size; 
+		randX = (double)(rand() % 100) / 10;
+		randY = (double)(rand() % 100) / 10; 
 		G.addVertex(randX, randY); 
 		for(int j=0; j < G.getNumberVertices()-1; j++){
 			dist = sqrt(pow(abs(randX - G.getX(j)), 2.0) 
@@ -70,8 +71,8 @@ void wirelessNetwork::degree(){
 	
 	average = sum / G.getNumberVertices(); 
 
-	cout << "The average degree: " << average << endl; 
-	cout << "The maximum degree: " << max << endl; 
+	//cout << "The average degree: " << average << endl; 
+	//cout << "The maximum degree: " << max << endl; 
 }
 
 void wirelessNetwork::TopologyControl(){
@@ -85,61 +86,68 @@ void wirelessNetwork::TopologyControl(){
 		if(neighbors1.size() != 0){
 			for(int j=0; j < neighbors1.size(); j++){
 				G.getNeighbors(neighbors2, neighbors1[j]);
-				if(neighbors2.size() != 0){
-					for(int k=0; k < neighbors1.size(); k++){
-						for(int l=0; l < neighbors2.size(); l++){
+				if(neighbors2.size() != 0)
+					for(int k=0; k < neighbors1.size(); k++)
+						for(int l=0; l < neighbors2.size(); l++)
 							if(neighbors1[k] == neighbors2[l]){
 								G.getDistance(i, neighbors2[l], dist1); 
 								G.getDistance(i, neighbors1[j], dist2); 
 								G.getDistance(neighbors1[j], neighbors2[l], dist3); 
-								if((dist1 <  dist2) && (dist3 <  dist2)) {
+								if((dist1 <  dist2) && (dist3 <  dist2))
 									temp.at(j) = -1;
-								}		
 							}
-						}
-					}
-				}
-			}
-			for(int m=0; m < temp.size(); m++){
+			for(int m=0; m < temp.size(); m++)
 				if(temp[m] == -1){
 					G.deleteEdge(i, m);
-				}	
+					G.deleteEdge(m, i);
+				}
 			}
 		}
 	}
 }
 
-/*vector<int> wirelessNetwork::compassRouting(int s, int t){
+int wirelessNetwork::compassRouting(int s, int t){
 	vector <int> neighbors;
-	vector<int> path;
-	int src; 
-	if(s == t){ return path; }
-	else{ 
-		for(int j=0; j<G.getNumberVertices(); j++){
-			G.getNeighbors(neighbors, s); 
-			int min = (acos(G.getDistance(s,t) / G.getDistance(s, neighbors[0]))); 
-			for(int i=1; i<neighbors.size(); i++){
-				if((acos(G.getDistance(s,t) / G.getDistance(s, neighbors[i]))) < min ){
-					min = acos(G.getDistance(t, i) / G.getDistance(s, t)); 
-					src = i; 
-				}
+	int src, sum = 0; 
+	float dist1, dist2, dist3; 
+	float res; 
+	if(s == t){ return sum; }
+	else
+		G.getNeighbors(neighbors, s);
+		G.getDistance(s,t, dist1); 
+		G.getDistance(s, neighbors[0], dist2); 
+		G.getDistance(t, neighbors[0], dist3); 
+		int min = (acos(pow(dist1,2.0)+pow(dist3,2.0)
+			-pow(dist2,2.0)) / (2 * dist1 * dist3)) * (180/3.14); 
+		for(int i=1; i<neighbors.size(); i++){
+			G.getDistance(s,t, dist1); 
+			G.getDistance(s, neighbors[i], dist2);
+			G.getDistance(t, neighbors[i], dist3); 
+			cout << "dist1: " << dist1 << endl; 
+			cout << "dist2: " << dist2 << endl; 
+			cout << "dist3: " << dist3 << endl;  
+			res = (acos((pow(dist1,2.0)+pow(dist3,2.0)
+			-pow(dist2,2.0))) / (2 * dist1 * dist3)) * (180/3.14) ;
+			cout << "res: " << res << endl; 
+			if(res < min){
+				min = res; 
+				cout << "min: " << min << endl; 
+				src = i;
 			}
-			path.push_back(src); 
 		}
-		return path; 
-	}	
- }*/
+		return sum = 1 + compassRouting(src, t); 
+ }
 
- void wirelessNetwork::generateGraph(){
+ void wirelessNetwork::generateGraph(string filename){
 	ofstream outputFile; 
-	outputFile.open("data.dot");
-	outputFile << "graph G { \n overlap=false; \n size = \"10,10\"; \n"; 
+	outputFile.open(filename.c_str());
+	outputFile << "graph G { \n overlap=false; \n size = \"100,100\"; \n"; 
 	outputFile << "node [shape=circle, fixedsize=true, fontsize=5, "; 
-	outputFile << "width=.50, height=.50];\n"; 
+	outputFile << "height=.15];\n"; 
 
 	for(int j=0; j<G.getNumberVertices(); j++){
 		outputFile << j << "[ pos = \"" << G.getX(j) << ","; 
-		outputFile << G.getY(j) << "\", label = \"" << j << "\" ]" << endl; 
+		outputFile << G.getY(j) << "\" , label = \"" << j << "\" ]" << endl; 
 	}
 	for(int j=0; j<G.getNumberVertices(); j++){
 		vector<int> v;

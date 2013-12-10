@@ -39,11 +39,11 @@ int main (){
 		
 		//cout << "Degree before Topology Control\n"; 
 		UDG.degree();
-		UDG.generateGraph(name1); 
+		//UDG.generateGraph(name1); 
 		UDG.TopologyControl();
 		//cout << "Degree after Topology Control\n"; 
 		UDG.degree();
-		UDG.generateGraph(name2); 
+		//UDG.generateGraph(name2); 
 
 		j+=50; 
 	}
@@ -57,7 +57,6 @@ int main (){
 	length of the path from s to t that was discovered. Present your results 
 	in a tabular form.*/
 
-
 	for(int i=0; i<10; i++){
 		wirelessNetwork UDGa1000(10, 1000);			
 		srand(time(NULL)); 
@@ -67,7 +66,7 @@ int main (){
 		s = rand()%1000; 
 		t = rand()%1000; 
 
-		cout << "length of the path: "; 
+		cout << "length of the path, network " << i+1 << ": (before topology): "; 
 		cout << UDGa1000.compassRouting(s, t) << endl;  
 	
 	}	
@@ -93,9 +92,9 @@ int main (){
 		t = rand()%1000; 
 
 		UDGb1000.TopologyControl(); 	
-		cout << "length of the path: "; 
+		cout << "length of the path, network " << i+1 << ": (after topology): "; 
 		cout << UDGb1000.compassRouting(s, t) << endl; 
 	}
-	
+
 	return 0; 
 }

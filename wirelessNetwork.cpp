@@ -96,58 +96,58 @@ void wirelessNetwork::TopologyControl(){
 								if((dist1 <  dist2) && (dist3 <  dist2))
 									temp.at(j) = -1;
 							}
-			for(int m=0; m < temp.size(); m++)
-				if(temp[m] == -1){
-					G.deleteEdge(i, m);
-					G.deleteEdge(m, i);
 				}
 			}
+		for(int m=0; m < temp.size(); m++)
+			if(temp[m] == -1){
+				G.deleteEdge(i, m);
 		}
 	}
 }
 
 int wirelessNetwork::compassRouting(int s, int t){
 	vector <int> neighbors;
-	int src, sum = 0; 
+	vector <int> check;
+	int src; 
 	float dist1, dist2, dist3; 
-	float res; 
-	if(s == t){ return sum; }
-	else
+	float ang; 
+	if(s != t){
 		G.getNeighbors(neighbors, s);
 		G.getDistance(s,t, dist1); 
 		G.getDistance(s, neighbors[0], dist2); 
 		G.getDistance(t, neighbors[0], dist3); 
-		int min = (acos(pow(dist1,2.0)+pow(dist3,2.0)
-			-pow(dist2,2.0)) / (2 * dist1 * dist3)) * (180/3.14); 
+		float min = acos((pow(dist1,2.0) + pow(dist2,2.0)
+		 		- pow(dist3,2.0)) / (2*dist1*dist2)) * (180/3.14); 
 		for(int i=1; i<neighbors.size(); i++){
 			G.getDistance(s,t, dist1); 
 			G.getDistance(s, neighbors[i], dist2);
 			G.getDistance(t, neighbors[i], dist3); 
-			cout << "dist1: " << dist1 << endl; 
-			cout << "dist2: " << dist2 << endl; 
-			cout << "dist3: " << dist3 << endl;  
-			res = (acos((pow(dist1,2.0)+pow(dist3,2.0)
-			-pow(dist2,2.0))) / (2 * dist1 * dist3)) * (180/3.14) ;
-			cout << "res: " << res << endl; 
-			if(res < min){
-				min = res; 
-				cout << "min: " << min << endl; 
+			ang = acos((pow(dist1,2.0) + pow(dist2,2.0)
+		 		- pow(dist3,2.0)) / (2*dist1*dist2)) * (180/3.14); 
+			if(ang < min){
+				min = ang; 
 				src = i;
 			}
+			check.push_back(src); 
+			for(int i=0; i<check.size()-1; i++){
+				if(src == check[i]) return 0; 
+				else return 1 + compassRouting(src, t); 		
+			} 
 		}
-		return sum = 1 + compassRouting(src, t); 
- }
+	}
+	else return 0; 
+}
 
  void wirelessNetwork::generateGraph(string filename){
 	ofstream outputFile; 
 	outputFile.open(filename.c_str());
-	outputFile << "graph G { \n overlap=false; \n size = \"100,100\"; \n"; 
+	outputFile << "graph G { \n size = \"100,100\"; \n"; 
 	outputFile << "node [shape=circle, fixedsize=true, fontsize=5, "; 
 	outputFile << "height=.15];\n"; 
 
 	for(int j=0; j<G.getNumberVertices(); j++){
 		outputFile << j << "[ pos = \"" << G.getX(j) << ","; 
-		outputFile << G.getY(j) << "\" , label = \"" << j << "\" ]" << endl; 
+		outputFile << G.getY(j) << "\" ]" << endl; 
 	}
 	for(int j=0; j<G.getNumberVertices(); j++){
 		vector<int> v;

@@ -32,7 +32,7 @@ void myGraph::deleteVertex(int pos){
 	
 void myGraph::deleteEdge(int V1, int V2){
 	Vertices[V1].adjacencyList[V2].setID(-1); 
-	Vertices[V1].adjacencyList[V2].setWeight(0); 
+	Vertices[V1].adjacencyList[V2].setWeight(0);
 }
 	
 void myGraph::getNeighbors(vector <int> &neighbors, int pos){

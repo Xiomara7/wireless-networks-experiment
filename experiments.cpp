@@ -57,21 +57,6 @@ int main (){
 	length of the path from s to t that was discovered. Present your results 
 	in a tabular form.*/
 
-	cout << "SECOND EXPERIMENT: \n"; 
-	for(int i=0; i<10; i++){
-		wirelessNetwork UDGa1000(10, 1000);			
-		srand(time(NULL)); 
-
-		int s, t; 
-
-		s = rand()%1000; 
-		t = rand()%1000; 
-
-		cout << "length of the path, network " << i+1 << ": (before topology): "; 
-		cout << UDGa1000.compassRouting(s, t) << endl;  
-	
-	}	
-
 /*  Start with the same wireless network G generated for Experiment (2) and 
 	run  topology  control  on it to get a sparser network H. Run Experiment 
 	(2) again, but use the network H this time. Tabulate your results as for 
@@ -82,9 +67,10 @@ int main (){
 	experiments.cpp makes extensive calls  to  methods in the wirelessNetwork  
 	class and possibly to methods in the myGraph class as well. 	
 */
-	cout << "THIRD EXPERIMENT: \n"; 
-	for(int i=0; i<=10; i++){
-		wirelessNetwork UDGb1000(10, 1000);			
+
+	cout << "SECOND and THIRD EXPERIMENT: \n"; 
+	for(int i=0; i<10; i++){
+		wirelessNetwork UDG1000(10, 1000);			
 		srand(time(NULL)); 
 
 		int s, t; 
@@ -92,10 +78,17 @@ int main (){
 		s = rand()%1000; 
 		t = rand()%1000; 
 
-		UDGb1000.TopologyControl(); 	
+		cout << "length of the path, network " << i+1 << ": (before topology): "; 
+		cout << UDG1000.compassRouting(s, t) << endl;
+
+		s = rand()%1000; 
+		t = rand()%1000; 
+
+		UDG1000.TopologyControl(); 	
 		cout << "length of the path, network " << i+1 << ": (after topology): "; 
-		cout << UDGb1000.compassRouting(s, t) << endl; 
-	}
+		cout << UDG1000.compassRouting(s, t) << endl;   
+	
+	}	
 
 	return 0; 
 }

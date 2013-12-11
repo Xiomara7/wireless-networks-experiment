@@ -155,7 +155,6 @@ int wirelessNetwork::compassRouting(int s, int t){
 	vector <int> neighbors;			// Neighbors of the (i) node.
 	vector <int> check;				// visited nodes.
 	int src; 						// v, new source vertex
-	int sum; 
 	float dist1, dist2, dist3; 		// dist1: |s,t|
 									// dist2: |s,v|; 
 									// dist3: |t,v|
@@ -183,32 +182,22 @@ int wirelessNetwork::compassRouting(int s, int t){
 			ang = acos((pow(dist1,2.0) + pow(dist2,2.0)
 		 	- pow(dist3,2.0)) / (2*dist1*dist2)) * (180/3.14); 
 			// If the angle is less than the actual minimum
-			cout << "ang: " << ang << endl; 
+			cout << "angle: " << ang << endl; 
 			if(ang < min){
 				min = ang; 
-				cout << "min" << min << endl; 
 				src = neighbors[i];				// src will be v, the new source vertex
-				cout << "src" << src << endl; 
-				check.push_back(src);					// save the visited vertex v 
-				for(int i = 0; i < check.size()-1; i++)
-					if(src == check[i]){ 
-						return 0; 
-					}
-				else {
-					sum += 1 + compassRouting(src, t); 		
-					return sum;
-				} 
+				cout << "src: " << src << endl; 
 			}
-		/*} check.push_back(src);					// save the visited vertex v 
+		}	
+
+		check.push_back(src);					// save the visited vertex v 
 		for(int i = 0; i < check.size()-1; i++){	
 			// if v was visited, there's not path and return 0. 
 			if(src == check[i]){ 
-				cout << "check" << check[i] << endl; 
-				return sum += 0;
+				src = t; 
 			}
-			else 
-			return sum; 
-		*/}
+		}
+		return 1 + compassRouting(src, t); 	
 	}
 }
 

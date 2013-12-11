@@ -68,7 +68,7 @@ int main (){
 	class and possibly to methods in the myGraph class as well. 	
 */
 
-	cout << "SECOND and THIRD EXPERIMENT: \n"; 
+	/*cout << "SECOND and THIRD EXPERIMENT: \n"; 
 	for(int i=0; i<10; i++){
 		wirelessNetwork UDG1000(10, 1000);			
 		srand(time(NULL)); 
@@ -88,7 +88,7 @@ int main (){
 		cout << "length of the path, network " << i+1 << ": (after topology): "; 
 		cout << UDG1000.compassRouting(s, t) << endl;   
 	
-	}	
+	}*/	
 
 	return 0; 
 }

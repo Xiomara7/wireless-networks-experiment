@@ -31,19 +31,19 @@ int main (){
    resulted in a much sparser graph or not.*/
 
 	int j = 500; 
-	
+	cout << "FIRST EXPERIMENT: \n"; 
 	for(int i=0 ; i<10; i++){
 		string name1 = toStr(i) + "before.dot"; 
 		string name2 = toStr(i) + "after.dot"; 
 		wirelessNetwork UDG(10, j);
 		
-		//cout << "Degree before Topology Control\n"; 
+		cout << "Degree before Topology Control\n"; 
 		UDG.degree();
-		//UDG.generateGraph(name1); 
+		UDG.generateGraph(name1); 
 		UDG.TopologyControl();
-		//cout << "Degree after Topology Control\n"; 
+		cout << "Degree after Topology Control\n"; 
 		UDG.degree();
-		//UDG.generateGraph(name2); 
+		UDG.generateGraph(name2); 
 
 		j+=50; 
 	}
@@ -57,6 +57,7 @@ int main (){
 	length of the path from s to t that was discovered. Present your results 
 	in a tabular form.*/
 
+	cout << "SECOND EXPERIMENT: \n"; 
 	for(int i=0; i<10; i++){
 		wirelessNetwork UDGa1000(10, 1000);			
 		srand(time(NULL)); 
@@ -81,7 +82,7 @@ int main (){
 	experiments.cpp makes extensive calls  to  methods in the wirelessNetwork  
 	class and possibly to methods in the myGraph class as well. 	
 */
-
+	cout << "THIRD EXPERIMENT: \n"; 
 	for(int i=0; i<=10; i++){
 		wirelessNetwork UDGb1000(10, 1000);			
 		srand(time(NULL)); 

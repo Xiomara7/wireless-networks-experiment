@@ -71,8 +71,8 @@ void wirelessNetwork::degree(){
 	
 	average = sum / G.getNumberVertices(); 
 
-	//cout << "The average degree: " << average << endl; 
-	//cout << "The maximum degree: " << max << endl; 
+	cout << "The average degree: " << average << endl; 
+	cout << "The maximum degree: " << max << endl; 
 }
 
 void wirelessNetwork::TopologyControl(){

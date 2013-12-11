@@ -28,7 +28,7 @@ class wirelessNetwork {
 		 *  be kept or dropped]
 		 */
 
-		int compassRouting(int s, int t); 
+		int compassRouting(int s, int t, vector <int> &check); 
 		/**
 		 * [compassRouting  Suppose a node x receives a message m 
  		 *  intended  for  destination t. Further suppose that x knows its location

@@ -151,9 +151,9 @@ void wirelessNetwork::TopologyControl(){
  * find a neighbor v of s that makes  the smallest angle with the direction 
  * st and do compass routing with source v and destination t.]
  */
-int wirelessNetwork::compassRouting(int s, int t){
+int wirelessNetwork::compassRouting(int s, int t,vector <int> &check){
 	vector <int> neighbors;			// Neighbors of the (i) node.
-	vector <int> check;				// visited nodes.
+	//vector <int> check;			// visited nodes.
 	int src; 						// v, new source vertex
 	float dist1, dist2, dist3; 		// dist1: |s,t|
 									// dist2: |s,v|; 
@@ -173,8 +173,8 @@ int wirelessNetwork::compassRouting(int s, int t){
 		- pow(dist3,2.0)) / (2*dist1*dist2)) * (180/3.14);  // use as the minimum
 		
 		for(int i=1; i<neighbors.size(); i++){
-			cout << "s: " << s << endl; 
-			cout << "t: " << t << endl; 
+			//cout << "s: " << s << endl; 
+			//cout << "t: " << t << endl; 
 			G.getDistance(s,t, dist1); 				// dist1: |s,t|
 			G.getDistance(s, neighbors[i], dist2);	// dist2: |s,v|
 			G.getDistance(t, neighbors[i], dist3); 	// dist3: |t,v|
@@ -182,22 +182,21 @@ int wirelessNetwork::compassRouting(int s, int t){
 			ang = acos((pow(dist1,2.0) + pow(dist2,2.0)
 		 	- pow(dist3,2.0)) / (2*dist1*dist2)) * (180/3.14); 
 			// If the angle is less than the actual minimum
-			cout << "angle: " << ang << endl; 
+			//cout << "angle: " << ang << endl; 
 			if(ang < min){
 				min = ang; 
 				src = neighbors[i];				// src will be v, the new source vertex
-				cout << "src: " << src << endl; 
+				//cout << "src: " << src << endl; 
 			}
 		}	
-
 		check.push_back(src);					// save the visited vertex v 
-		for(int i = 0; i < check.size()-1; i++){	
+		for(int i = 0; i < check.size(); i++){	
 			// if v was visited, there's not path and return 0. 
 			if(src == check[i]){ 
 				src = t; 
 			}
 		}
-		return 1 + compassRouting(src, t); 	
+		return 1 + compassRouting(src, t, check); 	
 	}
 }
 

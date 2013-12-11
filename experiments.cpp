@@ -68,9 +68,10 @@ int main (){
 	class and possibly to methods in the myGraph class as well. 	
 */
 
-	/*cout << "SECOND and THIRD EXPERIMENT: \n"; 
+	cout << "SECOND and THIRD EXPERIMENT: \n"; 
 	for(int i=0; i<10; i++){
 		wirelessNetwork UDG1000(10, 1000);			
+		vector<int> check;
 		srand(time(NULL)); 
 
 		int s, t; 
@@ -79,16 +80,16 @@ int main (){
 		t = rand()%1000; 
 
 		cout << "length of the path, network " << i+1 << ": (before topology): "; 
-		cout << UDG1000.compassRouting(s, t) << endl;
+		cout << UDG1000.compassRouting(s, t, check) << endl;
 
 		s = rand()%1000; 
 		t = rand()%1000; 
 
 		UDG1000.TopologyControl(); 	
 		cout << "length of the path, network " << i+1 << ": (after topology): "; 
-		cout << UDG1000.compassRouting(s, t) << endl;   
+		cout << UDG1000.compassRouting(s, t, check) << endl;   
 	
-	}*/	
+	}	
 
 	return 0; 
 }

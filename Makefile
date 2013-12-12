@@ -8,7 +8,7 @@ wirelessNetwork.o: wirelessNetwork.cpp wirelessNetwork.h
 	g++ -c wirelessNetwork.cpp
 
 clean:
-	rm *.o experiments
+	rm *.o *.dot experiments
 
 dot:
 	bash convert.sh

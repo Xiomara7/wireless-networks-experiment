@@ -15,7 +15,7 @@ class wirelessNetwork {
 		 * DEFAULT CONSTRUCTOR
 		 */
 
-		 wirelessNetwork(int size, int n);  
+		 wirelessNetwork(float size, int n);  
 		/**
 		 * CONSTRUCTOR WITH PARAMETERS
 		 */
@@ -28,7 +28,7 @@ class wirelessNetwork {
 		 *  be kept or dropped]
 		 */
 
-		int compassRouting(int s, int t, vector <int> &check); 
+		vector<int> compassRouting(int s, int t, vector <bool> &visited); 
 		/**
 		 * [compassRouting  Suppose a node x receives a message m 
  		 *  intended  for  destination t. Further suppose that x knows its location
@@ -40,7 +40,8 @@ class wirelessNetwork {
 		 * 
 		 * @return   [if the current vertex s equals t, then we are done; otherwise 
  		 * find a neighbor v of s that makes  the smallest angle with the direction 
- 		 * st and do compass routing with source v and destination t.]
+ 		 * st and do compass routing with source v and destination t. It returns the
+ 		 * path.]
 		 */
 
 		
@@ -57,6 +58,10 @@ class wirelessNetwork {
  		*  the graph using Graphviz ]
  		* @param filename [name of the file]
  		*/
+ 	
+ 		int getNumberVertices(){
+ 			return G.getNumberVertices(); 
+ 		}
 }; 
 
 #endif

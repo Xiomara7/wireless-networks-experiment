@@ -18,14 +18,14 @@ wirelessNetwork::wirelessNetwork(){
 	srand(time(NULL)); 
 	float dist; 
 
-	float randX = (double)(rand() % 10000) / 1000; // X for the first node
-	float randY = (double)(rand() % 10000) / 1000; // Y for the first node
+	float randX = (double)(rand() % 100) / 10; // X for the first node
+	float randY = (double)(rand() % 100) / 10; // Y for the first node
 	
 	G.addVertex(randX, randY); 
 
 	for(int i=1; i<500; i++){
-		randX = (double)(rand() % 10000) / 1000; 
-		randY = (double)(rand() % 10000) / 1000; 
+		randX = (double)(rand() % 100) / 10; 
+		randY = (double)(rand() % 100) / 10; 
 		G.addVertex(randX, randY); 
 		for(int j = 0; j < G.getNumberVertices()-1; j++){
 			dist = sqrt(pow(abs(randX - G.getX(j)), 2.0) 
@@ -160,6 +160,11 @@ int wirelessNetwork::compassRouting(int s, int t,vector <int> &check){
 									// dist3: |t,v|
 	float ang; 						// angle to be calculate
 	
+	for(int i = 0; i < check.size(); i++)
+		// if v was visited, there's not path and return 0. 
+		if(src == check[i]){
+			return 0; 
+		}
 	if(s == t) return 0;
 	
 	else{ 
@@ -173,8 +178,6 @@ int wirelessNetwork::compassRouting(int s, int t,vector <int> &check){
 		- pow(dist3,2.0)) / (2*dist1*dist2)) * (180/3.14);  // use as the minimum
 		
 		for(int i=1; i<neighbors.size(); i++){
-			//cout << "s: " << s << endl; 
-			//cout << "t: " << t << endl; 
 			G.getDistance(s,t, dist1); 				// dist1: |s,t|
 			G.getDistance(s, neighbors[i], dist2);	// dist2: |s,v|
 			G.getDistance(t, neighbors[i], dist3); 	// dist3: |t,v|
@@ -182,23 +185,15 @@ int wirelessNetwork::compassRouting(int s, int t,vector <int> &check){
 			ang = acos((pow(dist1,2.0) + pow(dist2,2.0)
 		 	- pow(dist3,2.0)) / (2*dist1*dist2)) * (180/3.14); 
 			// If the angle is less than the actual minimum
-			//cout << "angle: " << ang << endl; 
 			if(ang < min){
 				min = ang; 
-				src = neighbors[i];				// src will be v, the new source vertex
-				//cout << "src: " << src << endl; 
-			}
-		}	
-		check.push_back(src);					// save the visited vertex v 
-		for(int i = 0; i < check.size(); i++){	
-			// if v was visited, there's not path and return 0. 
-			if(src == check[i]){ 
-				src = t; 
+				src = neighbors[i];							// src will be v, the new source vertex
+				check.push_back(src);						// save the visited vertex v 
 			}
 		}
 		return 1 + compassRouting(src, t, check); 	
 	}
-}
+}	
 
 /**
  * [wirelessNetwork::generateGraph: Generate the dot files to represent 

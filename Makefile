@@ -1,5 +1,5 @@
-experiments: myGraph.o wirelessNetwork.o
-	g++ -o experiments myGraph.cpp wirelessNetwork.cpp experiments.cpp
+experiments: myGraph.o wirelessNetwork.o experiments.cpp
+	g++ -o experiments myGraph.o wirelessNetwork.o experiments.cpp
 
 myGraph.o: myGraph.cpp myGraph.h
 	g++ -c myGraph.cpp

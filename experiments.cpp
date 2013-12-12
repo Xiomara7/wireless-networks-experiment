@@ -30,7 +30,9 @@ int main (){
    sentences commenting on whether performing topology control has
    resulted in a much sparser graph or not.*/
 
-	int j = 500; 
+	
+
+	/*int j = 500; 
 	cout << "FIRST EXPERIMENT: \n"; 
 	for(int i=0 ; i<10; i++){
 		string name1 = toStr(i) + "before.dot"; 
@@ -46,7 +48,7 @@ int main (){
 		UDG.generateGraph(name2); 
 
 		j+=50; 
-	}
+	}*/
 
 /*  Generate a wireless network G with 1000 points distributed on a 10 × 10 
  	square. Then repeat the following 10 times. Uniformly at random, pick a 
@@ -68,10 +70,11 @@ int main (){
 	class and possibly to methods in the myGraph class as well. 	
 */
 
-	cout << "SECOND and THIRD EXPERIMENT: \n"; 
+	cout << "SECOND EXPERIMENT: \n"; 
 	for(int i=0; i<10; i++){
 		wirelessNetwork UDG1000(10, 1000);			
 		vector<int> check;
+
 		srand(time(NULL)); 
 
 		int s, t; 
@@ -80,7 +83,17 @@ int main (){
 		t = rand()%1000; 
 
 		cout << "length of the path, network " << i+1 << ": (before topology): "; 
-		cout << UDG1000.compassRouting(s, t, check) << endl;
+		cout << UDG1000.compassRouting(s, t, check) << endl;	
+	}	
+
+	/*cout << "THIRD EXPERIMENT: \n"; 
+	for(int i=0; i<10; i++){
+		wirelessNetwork UDG1000(10, 1000);			
+		vector<int> check;
+
+		srand(time(NULL)); 
+
+		int s, t; 
 
 		s = rand()%1000; 
 		t = rand()%1000; 
@@ -89,7 +102,8 @@ int main (){
 		cout << "length of the path, network " << i+1 << ": (after topology): "; 
 		cout << UDG1000.compassRouting(s, t, check) << endl;   
 	
-	}	
+	}*/	
+
 
 	return 0; 
 }

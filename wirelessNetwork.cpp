@@ -154,25 +154,26 @@ void wirelessNetwork::TopologyControl(){
  * find a neighbor v of s that makes  the smallest angle with the direction 
  * st and do compass routing with source v and destination t.]
  */
-vector<int> wirelessNetwork::compassRouting(int s, int t, vector <bool> &visited){
+vector<int> wirelessNetwork::compassRouting(int s, int t, vector <bool> &visited, vector<int> &path){
 	vector <int> neighbors;			// Neighbors of the (i) node.
-	vector <int> path;
-	G.getNeighbors(neighbors, s);
-	visited.at(s) = true;		// save the visited vertex s 
 
-	int src = -1; 						// v, new source vertex
 	float dist1, dist2, dist3; 		// dist1: |s,t|
 									// dist2: |s,v|; 
 									// dist3: |t,v|
 	float angle; 					// angle to be calculate
-	if(src == -1) return path; 
+	int src; 
+
+	if(s == -1) return path; 
+
+	G.getNeighbors(neighbors, s);
+	//for (int k = 1; k < neighbors.size(); k++)
+		//cout << neighbors[k] << "--" ;
 
 	if(s == t){
 		path.push_back(s); 
 	 	return path;
 	}
 	else{ 
-		cout << "esle\n"; 
 		G.getDistance(s,t, dist1); 				// dist1: |s,t|
 		G.getDistance(s, neighbors[0], dist2); 	// dist2: |s,v|
 		G.getDistance(t, neighbors[0], dist3); 	// dist3: |t,v|
@@ -180,26 +181,25 @@ vector<int> wirelessNetwork::compassRouting(int s, int t, vector <bool> &visited
 		float min = acos((pow(dist1,2.0) + pow(dist2,2.0)	// first calculation to 
 		- pow(dist3,2.0)) / (2*dist1*dist2)) * (180/3.14);  // use as the minimum
 		
-		for(int i=1; i<neighbors.size(); i++){
-			for(int jvisited[s] != true){
-				cout << "while\n"; 
+		//for(int i=1; i<neighbors.size(); i++){
+			for(int j=1; j < neighbors.size() && visited[s] == false; j++){
 				G.getDistance(s,t, dist1); 				// dist1: |s,t|
-				G.getDistance(s, neighbors[i], dist2);	// dist2: |s,v|
-				G.getDistance(t, neighbors[i], dist3); 	// dist3: |t,v|
-			
+				G.getDistance(s, neighbors[j], dist2);	// dist2: |s,v|
+				G.getDistance(t, neighbors[j], dist3); 	// dist3: |t,v|
+				
 				angle = acos((pow(dist1,2.0) + pow(dist2,2.0)
 		 		- pow(dist3,2.0)) / (2*dist1*dist2)) * (180/3.14); 
 				// If the angle is less than the actual minimum
 				if(angle < min){
 					min = angle; 
-					src = neighbors[i];	// src will be v, the new source vertex
+					src = neighbors[j];	// src will be v, the new source vertex
 				}
+				else src = -1; 
 			}
-		}
-		cout << "path b\n"; 
+		//}
+		visited.at(s) = true;			// save the visited vertex s 
 		path.push_back(src);
-		cout << "path a\n";  
-		compassRouting(src, t, visited); 	
+		compassRouting(src, t, visited, path); 	
 	}
 	return path; 
 }	
@@ -231,4 +231,11 @@ vector<int> wirelessNetwork::compassRouting(int s, int t, vector <bool> &visited
 	}
 	outputFile << "}"; 
 	outputFile.close(); 
+}
+
+void wirelessNetwork::printPath(vector<int> &path){
+	for(int j = 0; j < path.size(); j++){
+		cout << path[j] << " "; 
+	}
+	cout << endl;  
 }

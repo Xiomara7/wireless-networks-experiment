@@ -32,7 +32,7 @@ int main (){
 
 	
 
-	/*int j = 500; 
+	int j = 500; 
 	cout << "FIRST EXPERIMENT: \n"; 
 	for(int i=0 ; i<10; i++){
 		string name1 = toStr(i) + "before.dot"; 
@@ -41,14 +41,14 @@ int main (){
 		
 		cout << "Degree before Topology Control\n"; 
 		UDG.degree();
-		UDG.generateGraph(name1); 
+		//UDG.generateGraph(name1); 
 		UDG.TopologyControl();
 		cout << "Degree after Topology Control\n"; 
 		UDG.degree();
-		UDG.generateGraph(name2); 
+		//UDG.generateGraph(name2); 
 
 		j+=50; 
-	}*/
+	}
 
 /*  Generate a wireless network G with 1000 points distributed on a 10 × 10 
  	square. Then repeat the following 10 times. Uniformly at random, pick a 
@@ -73,8 +73,8 @@ int main (){
 	cout << "SECOND and THIRD EXPERIMENT: \n"; 
 	for(int i=0; i<10; i++){
 		wirelessNetwork UDG1000(10, 1000);			
-		vector<bool> visited1(UDG1000.getNumberVertices(), false);
-		vector<bool> visited2(UDG1000.getNumberVertices(), false);
+		vector<bool> visited1(UDG1000.getNumberVertices()-1, false);
+		vector<bool> visited2(UDG1000.getNumberVertices()-1, false);
 
 		vector<int> path1;
 		vector<int> path2;
@@ -86,16 +86,17 @@ int main (){
 		s = rand()%1000; 
 		t = rand()%1000; 
 
-		cout << "length of the path, network " << i+1 << ": (before topology): "; 
-		path1 = UDG1000.compassRouting(s, t, visited1);
+		UDG1000.compassRouting(s, t, visited1, path1);
+		cout << "path, network " << i+1 << ": (before topology): "; 
+		UDG1000.printPath(path1); 
 
 		s = rand()%1000; 
 		t = rand()%1000; 
 
 		UDG1000.TopologyControl(); 	
-		cout << "length of the path, network " << i+1 << ": (after topology): "; 
-		cout << "topology\n"; 
-		path2 = UDG1000.compassRouting(s, t, visited2);
+		UDG1000.compassRouting(s, t, visited2, path2);
+		cout << "path, network " << i+1 << ": (after topology): "; 
+		UDG1000.printPath(path2); 		
 	}	
 
 	return 0; 

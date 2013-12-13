@@ -28,7 +28,7 @@ class wirelessNetwork {
 		 *  be kept or dropped]
 		 */
 
-		vector<int> compassRouting(int s, int t, vector <bool> &visited); 
+		vector<int> compassRouting(int s, int t, vector <bool> &visited, vector<int> &path); 
 		/**
 		 * [compassRouting  Suppose a node x receives a message m 
  		 *  intended  for  destination t. Further suppose that x knows its location
@@ -62,6 +62,7 @@ class wirelessNetwork {
  		int getNumberVertices(){
  			return G.getNumberVertices(); 
  		}
+ 		void printPath(vector<int> &path); 
 }; 
 
 #endif

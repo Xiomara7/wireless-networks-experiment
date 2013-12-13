@@ -41,11 +41,11 @@ int main (){
 		
 		cout << "Degree before Topology Control\n"; 
 		UDG.degree();
-		//UDG.generateGraph(name1); 
+		UDG.generateGraph(name1); 
 		UDG.TopologyControl();
 		cout << "Degree after Topology Control\n"; 
 		UDG.degree();
-		//UDG.generateGraph(name2); 
+		UDG.generateGraph(name2); 
 
 		j+=50; 
 	}

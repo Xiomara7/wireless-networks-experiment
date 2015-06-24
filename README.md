@@ -3,7 +3,7 @@ wireless-networks-experiment
 
 Provide methods for generating wireless networks and for simulating protocols on these networks
 
-RUN make FOR COMPILE,
+* Run *make* for compile
 
-RUN make dot FOR GENERATE THE GRAPHS IN PDF FILES
+* Run *make dot* for generate the graphs in pdf files
 
